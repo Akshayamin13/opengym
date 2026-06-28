@@ -1,20 +1,20 @@
 # OpenGym
 
-A C++ gym management application with PostgreSQL persistence. Built as a hands-on project to refresh and modernize my C++ and database skills for backend developer roles in the DACH region.
+A small C++ learning project — a gym management application with PostgreSQL persistence. Built to refresh my C++ fundamentals and understand how business objects, database persistence, and application logic work together in a gym-management workflow.
 
 ## About this project
 
-I studied C, C++, and PostgreSQL during my Bachelor of Computer Applications, and I wanted to bring those skills back into active shape while job-searching for analyst and junior developer positions in Germany. OpenGym is a small but functional gym management system that models the kind of domain real fitness studio software deals with — members, contracts, relationships, and persistence.
+I studied C, C++, and PostgreSQL during my Bachelor of Computer Applications. While job-searching for analyst and junior developer roles in Germany, I wanted to bring those skills back into active shape and apply them in a small but realistic project.
 
-The project gave me a chance to apply academic foundations in a modern, production-style C++ context: C++20, the CMake build system, the repository pattern, and direct integration with PostgreSQL via libpqxx. The focus is on clean architecture and clear separation between business objects, persistence, and the user interface.
+OpenGym is a CLI-based gym management system that models the basics of how fitness studio software handles members, contracts, and the relationships between them. The focus is on clear structure: separating business objects, persistence, and the menu interface so each part has a single job.
 
 ## Features
 
-- Add, list, search, and manage gym members
-- Add, list, and filter contracts (with foreign-key relationship to members)
-- Query contracts by member ID (one-to-many relationship)
-- Robust input validation (handles bad input without crashing)
-- PostgreSQL persistence — data survives between sessions
+- Add, list, and search gym members
+- Add and list contracts with a foreign-key link to members
+- List all contracts belonging to a specific member
+- Input validation that handles bad input without crashing
+- PostgreSQL persistence — data is saved automatically and survives between runs
 - Interactive CLI menu
 
 ## Tech stack
@@ -23,31 +23,10 @@ The project gave me a chance to apply academic foundations in a modern, producti
 - **Build system:** CMake
 - **Database:** PostgreSQL 16
 - **DB client library:** libpqxx 8
-- **Platform:** macOS (clang++); should build on Linux with minimal/no changes
+- **Platform:** macOS (clang++); should build on Linux with minimal changes
 
-## Architecture
-The two **Repository** classes encapsulate all database access. `main.cpp` knows nothing about SQL — it just calls `addMember(...)`, `listAll()`, `findById(...)`. This separation makes it trivial to swap the storage layer.
-
-## Database schema
-
-```sql
-CREATE TABLE members (
-    id INTEGER PRIMARY KEY,
-    first_name VARCHAR(100) NOT NULL,
-    last_name VARCHAR(100) NOT NULL,
-    email VARCHAR(200) NOT NULL
-);
-
-CREATE TABLE contracts (
-    id INTEGER PRIMARY KEY,
-    member_id INTEGER NOT NULL REFERENCES members(id),
-    type VARCHAR(100) NOT NULL,
-    monthly_fee NUMERIC(10, 2) NOT NULL,
-    active BOOLEAN NOT NULL
-);
-```
-
-The `member_id` foreign key enforces the relationship at the database level — a contract cannot reference a non-existent member.
+## Project structure
+The `Repository` classes hold all the database code. `main.cpp` only calls methods like `addMember(...)` and `listAll()` — it doesn't know SQL. This made it easy to replace file storage with PostgreSQL later, because only the repository code changed.
 
 ## How to build and run
 
@@ -62,7 +41,8 @@ brew services start postgresql@16
 
 ```bash
 createdb opengym
-psql opengym -c "CREATE TABLE members (id INTEGER PRIMARY KEY, first_name VARCHAR(100) NOT NULL, last_name VARCHAR(100) NOT NULL, email VARCHAR(200) NOT NULL); CREATE TABLE contracts (id INTEGER PRIMARY KEY, member_id INTEGER NOT NULL REFERENCES members(id), type VARCHAR(100) NOT NULL, monthly_fee NUMERIC(10, 2) NOT NULL, active BOOLEAN NOT NULL);"
+psql opengym < database/schema.sql
+psql opengym < database/sample_data.sql   # optional: load example data
 ```
 
 ### Build
@@ -80,23 +60,17 @@ make
 ./opengym
 ```
 
-## What this project reinforced
+## Honest note about scope and AI assistance
 
-Returning to C++ after working in analyst-focused roles, a few things stood out:
-
-- **Header vs. implementation separation** is enforced by the language and pays off as the project grows
-- **Modern CMake** is essential for any non-trivial C++ codebase; it abstracts platform differences cleanly
-- **The repository pattern** lets the rest of the application be storage-agnostic — switching from file persistence to PostgreSQL touched only two files
-- **`const` and references (`const T&`)** are not optional politeness; they're how modern C++ communicates intent and enforces correctness at compile time
-- **libpqxx + parameterized queries** make safe database access ergonomic and prevent SQL injection
+This is a small learning project, not production software. I used AI assistance for learning C++ patterns, debugging, and structuring the code. See [EXPLANATION.md](EXPLANATION.md) for a clear breakdown of what I built, what I understand, what I learned, and where AI helped.
 
 ## What's next
 
-- **Qt / QML GUI** to replace the CLI menu — natural extension of the existing layer separation
-- Additional entities (Courses, Check-ins, Invoices)
-- Unit tests with GoogleTest
-- Connection pooling for production-style robustness
+- Check-in feature (matching a typical gym module)
+- Qt or QML GUI
+- Additional entities (Courses, Invoices)
+- Unit tests
 
 ## Author
 
-[Akshay Amin](https://github.com/Akshayamin13) — Bachelor of Computer Applications graduate, currently based in Oldenburg, Germany, with an MBA in General Technology Management (Data Science focus). Actively job-searching for analyst and junior developer roles in the DACH region.
+[Akshay Amin](https://github.com/Akshayamin13) — Bachelor of Computer Applications, MBA in General Technology Management (Data Science focus). Based in Oldenburg, Germany. Actively job-searching for analyst and junior developer roles in the DACH region.

@@ -59,8 +59,7 @@ I used AI assistance throughout this project. Specifically:
 - **Qt and QML** — the job posting that motivated this project mentions Qt, and I haven't touched it yet
 - **Unit testing with GoogleTest** — testing patterns in C++
 - **Connection pooling and production-grade error handling** — what real applications do under load
-- **Smart pointers (`std::unique_ptr`, `std::shared_ptr`)** — I used raw pointers in one place (`findById`) but I know modern C++ usually prefers smart pointers
-- **Deeper SQL** — joins, indexes, transactions across multiple operations
+
 
 ## Why I'm sharing all this
 

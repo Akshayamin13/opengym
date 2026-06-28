@@ -1,12 +1,12 @@
 # OpenGym
 
-A C++ gym management application with PostgreSQL persistence. Built as a learning project to demonstrate modern C++ fundamentals, business object design, and database integration.
+A C++ gym management application with PostgreSQL persistence. Built as a hands-on project to refresh and modernize my C++ and database skills for backend developer roles in the DACH region.
 
 ## About this project
 
-I started learning C++ during my active job search to better align my technical foundation with backend roles in the DACH region — particularly junior application developer positions involving C++ and PostgreSQL. OpenGym is the result: a small but functional gym management system that mirrors the kind of domain modeling real fitness studio software handles (members, contracts, relationships, persistence).
+I studied C, C++, and PostgreSQL during my Bachelor of Computer Applications, and I wanted to bring those skills back into active shape while job-searching for analyst and junior developer positions in Germany. OpenGym is a small but functional gym management system that models the kind of domain real fitness studio software deals with — members, contracts, relationships, and persistence.
 
-The project covers core building blocks I wanted to understand hands-on: class design with constructors and encapsulation, the repository pattern, multi-file CMake projects, file and database I/O, and clean separation between the data layer, the storage layer, and the user interface.
+The project gave me a chance to apply academic foundations in a modern, production-style C++ context: C++20, the CMake build system, the repository pattern, and direct integration with PostgreSQL via libpqxx. The focus is on clean architecture and clear separation between business objects, persistence, and the user interface.
 
 ## Features
 
@@ -80,12 +80,12 @@ make
 ./opengym
 ```
 
-## What I learned
+## What this project reinforced
 
-This was my first hands-on C++ project. Beyond syntax, what stuck with me:
+Returning to C++ after working in analyst-focused roles, a few things stood out:
 
 - **Header vs. implementation separation** is enforced by the language and pays off as the project grows
-- **CMake** abstracts platform differences and is essential for any non-trivial C++ codebase
+- **Modern CMake** is essential for any non-trivial C++ codebase; it abstracts platform differences cleanly
 - **The repository pattern** lets the rest of the application be storage-agnostic — switching from file persistence to PostgreSQL touched only two files
 - **`const` and references (`const T&`)** are not optional politeness; they're how modern C++ communicates intent and enforces correctness at compile time
 - **libpqxx + parameterized queries** make safe database access ergonomic and prevent SQL injection
@@ -99,4 +99,4 @@ This was my first hands-on C++ project. Beyond syntax, what stuck with me:
 
 ## Author
 
-[Akshay Amin](https://github.com/Akshayamin13) — currently based in Oldenburg, Germany, actively job-searching for analyst and junior developer roles in the DACH region.
+[Akshay Amin](https://github.com/Akshayamin13) — Bachelor of Computer Applications graduate, currently based in Oldenburg, Germany, with an MBA in General Technology Management (Data Science focus). Actively job-searching for analyst and junior developer roles in the DACH region.

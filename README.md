@@ -8,6 +8,27 @@ I studied C, C++, and PostgreSQL during my Bachelor of Computer Applications. Wh
 
 OpenGym is a CLI-based gym management system that models the basics of how fitness studio software handles members, contracts, and the relationships between them. The focus is on clear structure: separating business objects, persistence, and the menu interface so each part has a single job.
 
+## Screenshots
+
+### Main menu
+![Main menu](screenshots/01-menu.png)
+
+### Adding a member
+![Adding a member](screenshots/02-add-member.png)
+
+### Listing all members
+![List members](screenshots/03-list-members.png)
+
+### Adding a contract
+![Adding a contract](screenshots/04-add-contract.png)
+
+### Contracts for a specific member (foreign-key query)
+![Contracts for a member](screenshots/05-contracts-for-member.png)
+
+### Same data viewed directly in PostgreSQL
+![PostgreSQL view](screenshots/06-postgresql-view.png)
+
+
 ## Features
 
 - Add, list, and search gym members

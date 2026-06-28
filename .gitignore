@@ -1,0 +1,18 @@
+# Build artifacts
+build/
+
+# Compiled binaries
+*.o
+*.exe
+opengym
+
+# Editor settings
+.vscode/
+.idea/
+
+# macOS
+.DS_Store
+
+# Old file-based persistence (no longer used)
+*.txt
+!CMakeLists.txt
